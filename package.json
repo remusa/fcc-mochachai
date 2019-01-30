@@ -31,8 +31,5 @@
 		"hyperdev",
 		"express"
 	],
-	"license": "MIT",
-	"devDependencies": {
-		"nodemon": "^1.18.9"
-	}
+	"license": "MIT"
 }
