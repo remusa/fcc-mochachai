@@ -63,23 +63,25 @@ const travellers = function(req, res) {
 
 app.route('/travellers').put(travellers)
 
-const error
+let error
 app.get(
     '/_api/get-tests',
     cors(),
     function(req, res, next) {
         if (error || process.env.SKIP_TESTS)
             return res.json({ status: 'unavailable' })
-        next();
+        next()
     },
     function(req, res, next) {
         if (!runner.report) return next()
-        res.json(testFilter(runner.report, req.query.type, req.query.n));
+        res.json(testFilter(runner.report, req.query.type, req.query.n))
     },
     function(req, res) {
-        runner.on('done', function(report){
-            process.nextTick(() =>  res.json(testFilter(runner.report, req.query.type, req.query.n)));
-        });
+        runner.on('done', function(report) {
+            process.nextTick(() =>
+                res.json(testFilter(runner.report, req.query.type, req.query.n))
+            )
+        })
     }
 )
 
@@ -102,7 +104,7 @@ app.listen(process.env.PORT || 3000, function() {
 module.exports = app // for testing
 
 function testFilter(tests, type, n) {
-    const out
+    let out
     switch (type) {
     case 'unit':
             out = tests.filter(t => t.context.match('Unit Tests'))
